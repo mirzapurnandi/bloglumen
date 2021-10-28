@@ -19,7 +19,12 @@ class CategoryController extends Controller
 
     public function index()
     {
-        //
+        $category = Category::select('id', 'name')->get();
+        return response()->json([
+            'status' => true,
+            'message' => 'All category',
+            'result' => $category
+        ], 200);
     }
 
     public function create(Request $request)
