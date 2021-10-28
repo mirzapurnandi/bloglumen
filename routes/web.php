@@ -12,4 +12,5 @@ $router->group([
     $router->get('profil', 'AuthController@profil');
 
     $router->post('category/create', 'CategoryController@create');
+    $router->post('category/update/{id}', 'CategoryController@update');
 });
