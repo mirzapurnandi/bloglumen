@@ -10,4 +10,6 @@ $router->group([
     $router->post('register', 'AuthController@register');
     $router->post('login', 'AuthController@login');
     $router->get('profil', 'AuthController@profil');
+
+    $router->post('category/create', 'CategoryController@create');
 });
