@@ -14,4 +14,5 @@ $router->group([
     $router->get('category', 'CategoryController@index');
     $router->post('category/create', 'CategoryController@create');
     $router->post('category/update/{id}', 'CategoryController@update');
+    $router->delete('category/delete', 'CategoryController@destroy');
 });
