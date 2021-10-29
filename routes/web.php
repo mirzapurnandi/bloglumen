@@ -1,6 +1,6 @@
 <?php
 
-$router->get('/', function () use ($router) {
+$router->get('/api', function () use ($router) {
     return $router->app->version();
 });
 
@@ -15,4 +15,9 @@ $router->group([
     $router->post('category/create', 'CategoryController@create');
     $router->post('category/update/{id}', 'CategoryController@update');
     $router->delete('category/delete', 'CategoryController@destroy');
+
+    $router->get('tag', 'TagController@index');
+    $router->post('tag/create', 'TagController@create');
+    $router->post('tag/update/{id}', 'TagController@update');
+    $router->delete('tag/delete', 'TagController@destroy');
 });
