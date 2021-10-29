@@ -78,6 +78,7 @@ $app->configure('app');
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
+    'ceklevel' => App\Http\Middleware\CekLevel::class,
 ]);
 
 /*

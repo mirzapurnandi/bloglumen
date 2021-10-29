@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tag;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
@@ -14,12 +15,12 @@ class TagController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api');
+        //$this->middleware('auth:api');
     }
 
     public function index()
     {
-        $tag = Tag::select('id', 'name')->get();
+        $tag = Tag::select('id', 'name', 'slug')->get();
         return response()->json([
             'status' => true,
             'message' => 'All Tags',
@@ -36,6 +37,7 @@ class TagController extends Controller
         try {
             $tag = new Tag;
             $tag->name = $request->name;
+            $tag->slug = Str::slug($request->name);
             $tag->save();
 
             return response()->json([

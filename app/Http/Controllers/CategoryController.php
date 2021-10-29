@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,12 +15,12 @@ class CategoryController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api');
+        //$this->middleware('auth:api');
     }
 
     public function index()
     {
-        $category = Category::select('id', 'name')->get();
+        $category = Category::select('id', 'name', 'slug')->get();
         return response()->json([
             'status' => true,
             'message' => 'All category',
@@ -36,6 +37,7 @@ class CategoryController extends Controller
         try {
             $category = new Category;
             $category->name = $request->name;
+            $category->slug = Str::slug($request->name);
             $category->save();
 
             return response()->json([
