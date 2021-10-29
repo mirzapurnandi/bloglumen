@@ -10,6 +10,7 @@ $router->group(
         'prefix' => 'api'
     ],
     function () use ($router) {
+        $router->get('users', 'AuthController@index');
         $router->post('register', 'AuthController@register');
         $router->post('login', 'AuthController@login');
         $router->get('profil', 'AuthController@profil');

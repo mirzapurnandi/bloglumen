@@ -19,6 +19,18 @@ class AuthController extends Controller
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
+    public function index()
+    {
+        $this->middleware('ceklevel:admin');
+        $user = User::all();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'All user',
+            'result' => $user
+        ], 200);
+    }
+
     public function register(Request $request)
     {
         $this->validate($request, [
