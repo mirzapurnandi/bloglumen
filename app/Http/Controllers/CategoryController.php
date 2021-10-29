@@ -21,11 +21,7 @@ class CategoryController extends Controller
     public function index()
     {
         $category = Category::select('id', 'name', 'slug')->get();
-        return response()->json([
-            'status' => true,
-            'message' => 'All category',
-            'result' => $category
-        ], 200);
+        return $this->successResponse($category, 'All Category');
     }
 
     public function create(Request $request)
@@ -40,17 +36,9 @@ class CategoryController extends Controller
             $category->slug = Str::slug($request->name);
             $category->save();
 
-            return response()->json([
-                'status' => true,
-                'message' => 'success add category',
-                'result' => $category
-            ], 201);
+            return $this->successResponse($category, 'Add Category Successfully', 201);
         } catch (\Exception $e) {
-            return response()->json([
-                'status' => false,
-                'message' => 'failed',
-                'result' => $e
-            ], 409);
+            return $this->errorResponse('failed', 409);
         }
     }
 
@@ -63,26 +51,14 @@ class CategoryController extends Controller
         try {
             $category = Category::find($id);
 
-            if (!$category) return response()->json([
-                'status' => false,
-                'message' => 'Data not Found...',
-                'result' => null
-            ], 404);
+            if (!$category) return $this->errorResponse('Data not Found...', 404);
 
             $category->name = $request->name;
             $category->save();
 
-            return response()->json([
-                'status' => true,
-                'message' => 'success edit category',
-                'result' => $category
-            ], 200);
+            return $this->successResponse($category, 'Successfully Edit Category');
         } catch (\Exception $e) {
-            return response()->json([
-                'status' => false,
-                'message' => 'failed',
-                'result' => $e
-            ], 409);
+            return $this->errorResponse('failed', 409);
         }
     }
 
@@ -90,25 +66,13 @@ class CategoryController extends Controller
     {
         $category = Category::find($request->id);
 
-        if (!$category) return response()->json([
-            'status' => false,
-            'message' => 'Data not Found...',
-            'result' => null
-        ], 404);
+        if (!$category) return $this->errorResponse('Data not Found...', 404);
 
         try {
             $category->delete();
-            return response()->json([
-                'status' => true,
-                'message' => 'Delete category successfully',
-                'result' => null
-            ], 200);
+            return $this->successResponse($category, 'Delete Category Successfully');
         } catch (\Exception $e) {
-            return response()->json([
-                'status' => false,
-                'message' => 'failed',
-                'result' => $e
-            ], 409);
+            return $this->errorResponse('failed', 409);
         }
     }
 }

@@ -21,11 +21,7 @@ class TagController extends Controller
     public function index()
     {
         $tag = Tag::select('id', 'name', 'slug')->get();
-        return response()->json([
-            'status' => true,
-            'message' => 'All Tags',
-            'result' => $tag
-        ], 200);
+        return $this->successResponse($tag, 'All Tags');
     }
 
     public function create(Request $request)
@@ -40,17 +36,9 @@ class TagController extends Controller
             $tag->slug = Str::slug($request->name);
             $tag->save();
 
-            return response()->json([
-                'status' => true,
-                'message' => 'success add Tag',
-                'result' => $tag
-            ], 201);
+            return $this->successResponse($tag, 'Add Tag Successfully', 201);
         } catch (\Exception $e) {
-            return response()->json([
-                'status' => false,
-                'message' => 'failed',
-                'result' => $e
-            ], 409);
+            return $this->errorResponse('failed', 409);
         }
     }
 
@@ -63,26 +51,14 @@ class TagController extends Controller
         try {
             $tag = Tag::find($id);
 
-            if (!$tag) return response()->json([
-                'status' => false,
-                'message' => 'Data not Found...',
-                'result' => null
-            ], 404);
+            if (!$tag) return $this->errorResponse('Data not Found...', 404);
 
             $tag->name = $request->name;
             $tag->save();
 
-            return response()->json([
-                'status' => true,
-                'message' => 'success edit Tag',
-                'result' => $tag
-            ], 200);
+            return $this->successResponse($tag, 'Successfully Edit Tag');
         } catch (\Exception $e) {
-            return response()->json([
-                'status' => false,
-                'message' => 'failed',
-                'result' => $e
-            ], 409);
+            return $this->errorResponse('failed', 409);
         }
     }
 
@@ -90,25 +66,13 @@ class TagController extends Controller
     {
         $tag = Tag::find($request->id);
 
-        if (!$tag) return response()->json([
-            'status' => false,
-            'message' => 'Data not Found...',
-            'result' => null
-        ], 404);
+        if (!$tag) return $this->errorResponse('Data not Found...', 404);
 
         try {
             $tag->delete();
-            return response()->json([
-                'status' => true,
-                'message' => 'Delete Tag successfully',
-                'result' => null
-            ], 200);
+            return $this->successResponse($tag, 'Delete Tag Successfully');
         } catch (\Exception $e) {
-            return response()->json([
-                'status' => false,
-                'message' => 'failed',
-                'result' => $e
-            ], 409);
+            return $this->errorResponse('failed', 409);
         }
     }
 }

@@ -24,11 +24,7 @@ class AuthController extends Controller
         $this->middleware('ceklevel:admin');
         $user = User::all();
 
-        return response()->json([
-            'status' => true,
-            'message' => 'All user',
-            'result' => $user
-        ], 200);
+        return $this->successResponse($user, 'All User');
     }
 
     public function register(Request $request)
@@ -46,17 +42,9 @@ class AuthController extends Controller
             $user->password = Hash::make($request->password);
             $user->save();
 
-            return response()->json([
-                'status' => true,
-                'message' => 'success',
-                'result' => $user
-            ], 201);
+            return $this->successResponse($user, 'Add User Successfully', 201);
         } catch (\Exception $e) {
-            return response()->json([
-                'status' => false,
-                'message' => 'failed',
-                'result' => $e
-            ], 409);
+            return $this->errorResponse('failed', 409);
         }
     }
 
@@ -69,10 +57,7 @@ class AuthController extends Controller
 
         $credentials = $request->only(['username', 'password']);
         if (!$token = Auth::attempt($credentials)) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Unauthorized',
-            ], 401);
+            return $this->errorResponse('Unauthorized', 401);
         }
 
         return $this->respondWithToken($token);
