@@ -44,3 +44,17 @@ $router->group(
         $router->delete('/delete', 'TagController@destroy');
     }
 );
+
+## Post Router
+$router->group(
+    [
+        'prefix' => 'api/post',
+        'middleware' => ['auth:api', 'ceklevel:blogger,admin']
+    ],
+    function () use ($router) {
+        $router->get('/', 'PostController@index');
+        $router->post('/create', 'PostController@create');
+        $router->post('/update/{id}', 'PostController@update');
+        $router->delete('/delete', 'PostController@destroy');
+    }
+);

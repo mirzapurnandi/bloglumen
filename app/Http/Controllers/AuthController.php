@@ -17,12 +17,13 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('ceklevel:admin', ['except' => ['login', 'register', 'profil']]);
     }
 
     public function index()
     {
-        $this->middleware('ceklevel:admin');
-        $user = User::all();
+
+        $user = User::with('post')->get();
 
         return $this->successResponse($user, 'All User');
     }

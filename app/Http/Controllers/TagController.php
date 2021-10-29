@@ -70,7 +70,7 @@ class TagController extends Controller
 
         try {
             $tag->delete();
-            return $this->successResponse($tag, 'Delete Tag Successfully');
+            return $this->successResponse(null, 'Delete Tag Successfully');
         } catch (\Exception $e) {
             return $this->errorResponse('failed', 409);
         }

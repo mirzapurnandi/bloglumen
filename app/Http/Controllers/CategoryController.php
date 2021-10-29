@@ -70,7 +70,7 @@ class CategoryController extends Controller
 
         try {
             $category->delete();
-            return $this->successResponse($category, 'Delete Category Successfully');
+            return $this->successResponse(null, 'Delete Category Successfully');
         } catch (\Exception $e) {
             return $this->errorResponse('failed', 409);
         }

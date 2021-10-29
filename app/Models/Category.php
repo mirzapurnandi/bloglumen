@@ -14,4 +14,9 @@ class Category extends Model
     ];
 
     protected $table = 'categories';
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
 }
