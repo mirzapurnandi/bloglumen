@@ -13,7 +13,6 @@ class TripayCallbackController extends Controller
 
     public function handle(Request $request)
     {
-        dd(auth()->user());
         // ambil callback signature
         $callbackSignature = $request->server('HTTP_X_CALLBACK_SIGNATURE') ?? '';
 
@@ -54,12 +53,10 @@ class TripayCallbackController extends Controller
                     'status'    => 'PAID'
                 ]);
 
-                $user = User::where('id', Auth::user()->id)->first();
-                $user->update(
-                    [
-                        'status' => 'premium'
-                    ]
-                );
+                $user = User::where('id', $transaction->user_id)->first();
+                $user->update([
+                    'status' => 'premium'
+                ]);
 
                 return response()->json([
                     'success' => true,
