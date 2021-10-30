@@ -67,8 +67,10 @@ class AuthController extends Controller
 
     public function profil()
     {
-        $user = User::with('transaction')->find(Auth::user()->id);
-        return $this->successResponse($user, 'User');
-        //return response()->json(auth()->user());
+        /*
+            $user = User::with('transaction')->find(Auth::user()->id);
+            return $this->successResponse($user, 'User');
+        */
+        return response()->json(auth()->user());
     }
 }

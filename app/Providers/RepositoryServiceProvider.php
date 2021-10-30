@@ -15,5 +15,10 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Interfaces\TripayInterface',
             'App\Repositories\TripayRepository'
         );
+
+        $this->app->bind(
+            'App\Interfaces\PostInterface',
+            'App\Repositories\PostRepository'
+        );
     }
 }
