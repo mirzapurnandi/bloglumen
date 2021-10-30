@@ -34,6 +34,9 @@ class TripayController extends Controller
 
     public function store(Request $request)
     {
+        $status = $this->tripay->checkStatus();
+        if ($status) return $status;
+
         $result = $this->tripay->requestTransaction($request);
 
         $transaction = Transaction::create([

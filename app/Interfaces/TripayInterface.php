@@ -13,4 +13,6 @@ interface TripayInterface
     public function requestTransaction(Request $request);
 
     public function detailTransaction($reference);
+
+    public function checkStatus();
 }

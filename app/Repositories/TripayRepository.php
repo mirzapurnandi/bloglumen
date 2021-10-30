@@ -121,4 +121,12 @@ class TripayRepository implements TripayInterface
         $response = json_decode($response)->data;
         return $response ? $response : $err;
     }
+
+    public function checkStatus()
+    {
+        $user = Auth::user();
+        if ($user->status == 'premium') {
+            return $this->successResponse($user, 'User Anda sudah berstatus Premium. terima kasih');
+        }
+    }
 }
