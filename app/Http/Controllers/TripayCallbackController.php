@@ -53,7 +53,12 @@ class TripayCallbackController extends Controller
                     'status'    => 'PAID'
                 ]);
 
-                $user = User::where('username', Auth::user()->username)->update(['status' => 'premium']);
+                $user = User::where('id', Auth::user()->id)->first();
+                $user->update(
+                    [
+                        'status' => 'premium'
+                    ]
+                );
 
                 return response()->json([
                     'success' => true,
