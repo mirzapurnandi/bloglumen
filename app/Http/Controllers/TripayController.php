@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Interfaces\TripayInterface;
 use App\Models\Post;
+use App\Models\Transaction;
 
 class TripayController extends Controller
 {
@@ -34,12 +35,21 @@ class TripayController extends Controller
     public function store(Request $request)
     {
         $result = $this->tripay->requestTransaction($request);
-        dd($result);
-        return $result;
+
+        $transaction = Transaction::create([
+            'user_id' => Auth::user()->id,
+            'price' => $result->amount,
+            'reference' => $result->reference,
+            'merchant_ref' => $result->merchant_ref,
+            'status' => $result->status
+        ]);
+
+        return $this->successResponse($transaction, 'Add Payment Successfully');
     }
 
-    public function transaction()
+    public function transaction($reference)
     {
-        //
+        $result = $this->tripay->detailTransaction($reference);
+        return $this->successResponse($result, 'Detail Transactions Payment');
     }
 }

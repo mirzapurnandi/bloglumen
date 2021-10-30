@@ -71,3 +71,5 @@ $router->group(
         $router->get('/transaction/{reference}', 'TripayController@transaction');
     }
 );
+
+$router->post('callback', 'TripayCallbackController@handle');

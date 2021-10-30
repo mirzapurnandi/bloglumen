@@ -91,4 +91,34 @@ class TripayRepository implements TripayInterface
         $response = json_decode($response)->data;
         return $response ? $response : $err;
     }
+
+    public function detailTransaction($reference)
+    {
+        $apiKey = env('TRIPAY_API_KEY');
+
+        $payload = [
+            'reference' => $reference
+        ];
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_FRESH_CONNECT     => true,
+            CURLOPT_URL               => env('TRIPAY_LINK') . "transaction/detail?" . http_build_query($payload),
+            CURLOPT_RETURNTRANSFER    => true,
+            CURLOPT_HEADER            => false,
+            CURLOPT_HTTPHEADER        => array(
+                "Authorization: Bearer " . $apiKey
+            ),
+            CURLOPT_FAILONERROR       => false,
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $response = json_decode($response)->data;
+        return $response ? $response : $err;
+    }
 }

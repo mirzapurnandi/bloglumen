@@ -11,4 +11,6 @@ interface TripayInterface
     public function getPaymentChannel();
 
     public function requestTransaction(Request $request);
+
+    public function detailTransaction($reference);
 }

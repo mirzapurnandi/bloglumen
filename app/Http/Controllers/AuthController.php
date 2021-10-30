@@ -40,6 +40,7 @@ class AuthController extends Controller
             $user = new User;
             $user->name = $request->name;
             $user->username = $request->username;
+            $user->email = $request->email;
             $user->password = Hash::make($request->password);
             $user->save();
 
@@ -66,6 +67,8 @@ class AuthController extends Controller
 
     public function profil()
     {
-        return response()->json(auth()->user());
+        $user = User::with('transaction')->find(Auth::user()->id);
+        return $this->successResponse($user, 'User');
+        //return response()->json(auth()->user());
     }
 }
