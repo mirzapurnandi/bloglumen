@@ -88,6 +88,7 @@ class TripayRepository implements TripayInterface
 
         curl_close($curl);
 
+        $response = json_decode($response)->data;
         return $response ? $response : $err;
     }
 }

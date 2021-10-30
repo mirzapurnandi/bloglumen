@@ -62,10 +62,12 @@ $router->group(
 ## Tripay Router
 $router->group(
     [
-        'prefix' => 'api/tripay'
+        'prefix' => 'api/tripay',
+        'middleware' => ['auth:api', 'ceklevel:blogger']
     ],
     function () use ($router) {
         $router->get('/', 'TripayController@index');
-        $router->post('/store', 'TripayController@store');
+        $router->post('/transaction', 'TripayController@store');
+        $router->get('/transaction/{reference}', 'TripayController@transaction');
     }
 );

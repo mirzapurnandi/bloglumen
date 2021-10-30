@@ -10,11 +10,7 @@ use App\Models\Post;
 
 class TripayController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+
     protected $tripay;
 
     public function __construct(TripayInterface $tripay)
@@ -32,12 +28,18 @@ class TripayController extends Controller
                 $arr_data[] = $val;
             }
         }
-        return $arr_data;
+        return $this->successResponse($arr_data, 'Show All Payment Channel');
     }
 
     public function store(Request $request)
     {
         $result = $this->tripay->requestTransaction($request);
+        dd($result);
         return $result;
+    }
+
+    public function transaction()
+    {
+        //
     }
 }
