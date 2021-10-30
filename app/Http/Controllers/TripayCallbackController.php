@@ -41,7 +41,7 @@ class TripayCallbackController extends Controller
             }
 
             // Lakukan validasi nominal
-            if (intval($data->total_amount) !== intval($transaction->amount)) {
+            if (intval($data->total_amount) !== intval($transaction->price)) {
                 return "Invalid amount";
             }
 
