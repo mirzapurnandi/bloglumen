@@ -3,7 +3,6 @@
 namespace App\Interfaces;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\UserRequest;
 
 interface PostInterface
 {
