@@ -13,6 +13,7 @@ class TripayCallbackController extends Controller
 
     public function handle(Request $request)
     {
+        return Auth::user();
         // ambil callback signature
         $callbackSignature = $request->server('HTTP_X_CALLBACK_SIGNATURE') ?? '';
 
