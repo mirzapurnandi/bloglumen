@@ -53,7 +53,7 @@ class TripayRepository implements TripayInterface
             'merchant_ref'      => $merchantRef,
             'amount'            => $amount,
             'customer_name'     => $user->name,
-            'customer_email'    => 'emailpelanggan@domain.com',
+            'customer_email'    => $user->email,
             //'customer_phone'    => '081234567890',
             'order_items'       => [
                 [
