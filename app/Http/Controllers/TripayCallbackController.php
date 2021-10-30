@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Transaction;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TripayCallbackController extends Controller
 {
@@ -51,8 +53,11 @@ class TripayCallbackController extends Controller
                     'status'    => 'PAID'
                 ]);
 
+                $user = User::where('id', Auth::user()->id)->update(['status' => 'premium']);
+
                 return response()->json([
-                    'success' => true
+                    'success' => true,
+                    'result' => $user
                 ]);
             } elseif ($data->status == 'EXPIRED') // handle status EXPIRED
             {
