@@ -15,4 +15,6 @@ interface PostInterface
     public function updateData(Request $request, $id);
 
     public function deleteData(Request $request);
+
+    public function checkData();
 }

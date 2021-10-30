@@ -3,11 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Interfaces\PostInterface;
-use App\Models\Post;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Carbon;
 
 class PostController extends Controller
 {
@@ -25,6 +21,9 @@ class PostController extends Controller
 
     public function create(Request $request)
     {
+        $status = $this->post->checkData();
+        if ($status) return $status;
+
         $this->validate($request, [
             'title' => 'required|string|unique:posts,title',
             'description' => 'required',

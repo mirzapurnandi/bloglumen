@@ -78,4 +78,13 @@ class PostRepository implements PostInterface
             return $this->errorResponse('failed', 409);
         }
     }
+
+    public function checkData()
+    {
+        $post = Post::users()->count();
+        $user = Auth::user()->status;
+        if ($post >= 3 and $user == 'free') {
+            return $this->errorResponse('Maaf, Status User Anda belum Premium. Harap Upgrade terlebih dahulu, terima kasih', 404);
+        }
+    }
 }
