@@ -15,12 +15,11 @@ class TagSeeder extends Seeder
     public function run()
     {
         DB::table('tags')->insert([
-            ['name' => 'Categori Satu', 'slug' => 'categori-satu'],
-            ['name' => 'Categori Dua', 'slug' => 'categori-dua'],
-            ['name' => 'Categori Tiga', 'slug' => 'categori-tiga'],
-            ['name' => 'Categori Empat', 'slug' => 'categori-empat'],
-            ['name' => 'Categori Lima', 'slug' => 'categori-lima'],
-            ['name' => 'Categori Enam', 'slug' => 'categori-enam'],
+            ['name' => 'Satu Tag', 'slug' => 'satu-tag'],
+            ['name' => 'Dua Tag', 'slug' => 'dua-tag'],
+            ['name' => 'Tiga Tag', 'slug' => 'tiga-tag'],
+            ['name' => 'Empat Tag', 'slug' => 'empat-tag'],
+            ['name' => 'Lima Tag', 'slug' => 'lima-tag'],
         ]);
     }
 }
