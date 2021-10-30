@@ -58,3 +58,14 @@ $router->group(
         $router->delete('/delete', 'PostController@destroy');
     }
 );
+
+## Tripay Router
+$router->group(
+    [
+        'prefix' => 'api/tripay'
+    ],
+    function () use ($router) {
+        $router->get('/', 'TripayController@index');
+        $router->post('/store', 'TripayController@store');
+    }
+);
