@@ -23,7 +23,11 @@ class PostController extends Controller
 
     public function index()
     {
-        $post = Post::users()->get();
+        //$post = Post::users()->result()->get();
+        $post = Post::with('category:id,name,slug', 'tag:id,name,slug')
+            ->select('id', 'title', 'slug', 'description', 'category_id', 'date', 'user_id', 'uuid')
+            ->users()
+            ->get();
         return $this->successResponse($post, 'All Posts');
     }
 
@@ -32,7 +36,7 @@ class PostController extends Controller
         $this->validate($request, [
             'title' => 'required|string|unique:posts,title',
             'description' => 'required',
-            'category_id' => 'required'
+            'category_id' => 'required|exists:categories,id'
         ]);
 
         try {
@@ -59,7 +63,7 @@ class PostController extends Controller
         $this->validate($request, [
             'title' => 'required|string',
             'description' => 'required',
-            'category_id' => 'required'
+            'category_id' => 'required|exists:categories,id'
         ]);
 
         try {

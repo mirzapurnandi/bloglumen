@@ -23,6 +23,15 @@ class Post extends Model
         }
     }
 
+    public function scopeResult($query)
+    {
+        $result = $query->addSelect([
+            'category_name' => Category::select('name')
+                ->whereColumn('category_id', 'categories.id')->limit(1)
+        ]);
+        return $result;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -30,7 +39,7 @@ class Post extends Model
 
     public function category()
     {
-        return $this->hasOne(Category::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function tag()
