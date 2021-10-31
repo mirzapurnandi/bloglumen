@@ -25,5 +25,10 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Interfaces\TagInterface',
             'App\Repositories\TagRepository'
         );
+
+        $this->app->bind(
+            'App\Interfaces\CategoryInterface',
+            'App\Repositories\CategoryRepository'
+        );
     }
 }

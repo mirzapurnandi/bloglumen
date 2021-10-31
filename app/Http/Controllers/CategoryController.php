@@ -2,26 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Interfaces\CategoryInterface;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    protected $category;
+
+    public function __construct(CategoryInterface $category)
     {
+        $this->category = $category;
         //$this->middleware('auth:api');
     }
 
     public function index()
     {
-        $category = Category::select('id', 'name', 'slug')->get();
-        return $this->successResponse($category, 'All Category');
+        return $this->category->getData();
     }
 
     public function create(Request $request)
@@ -30,16 +28,7 @@ class CategoryController extends Controller
             'name' => 'required|string|unique:categories,name'
         ]);
 
-        try {
-            $category = new Category;
-            $category->name = $request->name;
-            $category->slug = Str::slug($request->name);
-            $category->save();
-
-            return $this->successResponse($category, 'Add Category Successfully', 201);
-        } catch (\Exception $e) {
-            return $this->errorResponse('failed', 409);
-        }
+        return $this->category->insertData($request);
     }
 
     public function update(Request $request, $id)
@@ -48,31 +37,11 @@ class CategoryController extends Controller
             'name' => 'required|string'
         ]);
 
-        try {
-            $category = Category::find($id);
-
-            if (!$category) return $this->errorResponse('Data not Found...', 404);
-
-            $category->name = $request->name;
-            $category->save();
-
-            return $this->successResponse($category, 'Successfully Edit Category');
-        } catch (\Exception $e) {
-            return $this->errorResponse('failed', 409);
-        }
+        return $this->category->updateData($request, $id);
     }
 
     public function destroy(Request $request)
     {
-        $category = Category::find($request->id);
-
-        if (!$category) return $this->errorResponse('Data not Found...', 404);
-
-        try {
-            $category->delete();
-            return $this->successResponse(null, 'Delete Category Successfully');
-        } catch (\Exception $e) {
-            return $this->errorResponse('failed', 409);
-        }
+        return $this->category->deleteData($request);
     }
 }
