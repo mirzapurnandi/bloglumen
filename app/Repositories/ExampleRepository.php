@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Traits\ApiResponser;
 use App\Interfaces\ExampleInterface;
+use Illuminate\Http\Request;
 
 class ExampleRepository implements ExampleInterface
 {
@@ -11,6 +12,21 @@ class ExampleRepository implements ExampleInterface
     use ApiResponser;
 
     public function getData()
+    {
+        //
+    }
+
+    public function insertData(Request $request)
+    {
+        //
+    }
+
+    public function updateData(Request $request, $id)
+    {
+        //
+    }
+
+    public function deleteData(Request $request)
     {
         //
     }

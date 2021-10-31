@@ -4,7 +4,7 @@ namespace App\Interfaces;
 
 use Illuminate\Http\Request;
 
-interface ExampleInterface
+interface TagInterface
 {
     public function getData();
 
