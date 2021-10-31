@@ -23,9 +23,9 @@ Password: password
 ## Postman Environment and Collection
 Your can get file environment Postman in folder bloglumen
 
-- Live: BlogLumen Live.postman_environment.json
-- Local: BlogLumen Test.postman_environment.json
+- Live: BlogLumen Live.postman_environment.json(https://github.com/mirzapurnandi/bloglumen/blob/master/BlogLumen%20Live.postman_environment.json)
+- Local: BlogLumen Test.postman_environment.json(https://github.com/mirzapurnandi/bloglumen/blob/master/BlogLumen%20Test.postman_environment.json)
 
 This collection Postman
-- BlogLumen.postman_collection.json
+- BlogLumen.postman_collection.json(https://github.com/mirzapurnandi/bloglumen/blob/master/BlogLumen.postman_collection.json)
 
