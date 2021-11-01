@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Interfaces\CategoryInterface;
-use App\Models\Category;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller

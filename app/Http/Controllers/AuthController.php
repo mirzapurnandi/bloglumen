@@ -22,7 +22,6 @@ class AuthController extends Controller
 
     public function index()
     {
-
         $user = User::with('post')->get();
 
         return $this->successResponse($user, 'All User');
@@ -34,6 +33,12 @@ class AuthController extends Controller
             'name'      => 'required|string',
             'username'  => 'required|string|unique:users',
             'password'  => 'required|confirmed'
+        ], [
+            'name.required' => ":attribute value tidak boleh kosong",
+            'username.required' => ":attribute value tidak boleh kosong",
+            'username.unique' => ":attribute sudah tersedia, harap ganti :attribute yang lain.",
+            'password.required' => ":attribute value tidak boleh kosong",
+            'password.confirmed' => ":attribute tidak sama dengan :attribute Konfirmasi",
         ]);
 
         try {
